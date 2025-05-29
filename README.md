@@ -118,7 +118,7 @@ The application requires an OpenAI API key for AI writing assistance features.
 - Cultural considerations in form design
 
 ### Switching Languages
-- Click the language toggle button in the header
+- Toggle the language from Language dropdown in the header
 - Language preference is maintained throughout the session
 - All form content adapts to the selected language
 
@@ -132,7 +132,6 @@ The application requires an OpenAI API key for AI writing assistance features.
 
 ### Implementation Details
 - Semantic HTML structure
-- Color contrast compliance
 - Responsive design for various screen sizes
 - Touch-friendly interface elements
 
@@ -149,7 +148,8 @@ The application requires an OpenAI API key for AI writing assistance features.
 ### Project Structure
 ```
 src/
-├── components/           # Reusable UI components
+├── components/           
+│   ├── ui/              # Reusable shadcn UI components
 │   ├── FormWizard.tsx   # Main wizard container
 │   ├── PersonalInfoStep.tsx
 │   ├── FamilyFinancialStep.tsx
@@ -161,6 +161,7 @@ src/
 ├── context/             # React context providers
 │   ├── FormContext.tsx  # Form state management
 │   └── LanguageContext.tsx # i18n and RTL support
+│   └── translation.ts # mock translation array of language objects  
 ├── services/           # External service integrations
 │   └── openai.ts       # OpenAI API service
 ├── types/              # TypeScript type definitions
@@ -177,21 +178,6 @@ src/
 4. **TypeScript**: Enhanced developer experience and runtime safety
 5. **Component Composition**: Modular, reusable component architecture
 
-## 🧪 Testing
-
-### Running Tests
-```bash
-npm run test        # Run unit tests
-npm run test:watch  # Run tests in watch mode
-npm run test:coverage # Generate coverage report
-```
-
-### Testing Strategy
-- Unit tests for utility functions
-- Component testing with React Testing Library
-- Integration tests for form flow
-- Accessibility testing with jest-axe
-
 ## 🚀 Production Deployment
 
 ### Build for Production
@@ -204,14 +190,6 @@ npm run build
 2. **Security Headers**: Configure appropriate CSP and security headers
 3. **Performance**: Enable gzip compression and CDN
 4. **Monitoring**: Add error tracking and analytics
-
-### Deployment Checklist
-- [ ] Remove development API key prompts
-- [ ] Configure backend API proxy
-- [ ] Set up error monitoring
-- [ ] Enable HTTPS
-- [ ] Configure proper caching headers
-- [ ] Test all functionality in production environment
 
 ## 🤝 Contributing
 
@@ -227,13 +205,6 @@ npm run build
 - Use Prettier for code formatting
 - Maintain component modularity
 - Add JSDoc comments for complex functions
-
-## 📞 Support
-
-For technical issues or questions:
-1. Check the troubleshooting section below
-2. Review the GitHub issues
-3. Contact the development team
 
 ## 🔧 Troubleshooting
 
@@ -259,28 +230,3 @@ For technical issues or questions:
 - Check Tailwind CSS responsive classes
 - Verify viewport meta tag
 
-## 🔄 Future Enhancements
-
-### Planned Features
-- [ ] Multi-file upload support
-- [ ] Email notification system
-- [ ] Application status tracking
-- [ ] Advanced form analytics
-- [ ] Offline mode support
-- [ ] Additional language support
-- [ ] Voice input for accessibility
-
-### Technical Improvements
-- [ ] Add comprehensive test suite
-- [ ] Implement service worker for offline support
-- [ ] Add performance monitoring
-- [ ] Enhance security measures
-- [ ] Optimize bundle size
-
----
-
-## 📄 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
----
