@@ -89,6 +89,8 @@ const FamilyFinancialStep: React.FC = () => {
                 required: t('validation.required'),
                 min: { value: 0, message: t('validation.negative') || 'Cannot be negative' },
               })}
+              isError={!!errors.dependents}
+              placeholder={t('family.dependentsPlaceholder') || 'Enter number of dependents'}
               className={`w-full ${isRTL ? 'text-right' : 'text-left'}`}
               aria-invalid={errors.dependents ? 'true' : 'false'}
             />
@@ -137,6 +139,8 @@ const FamilyFinancialStep: React.FC = () => {
                 required: t('validation.required'),
                 min: { value: 0, message: t('validation.negative') || 'Cannot be negative' },
               })}
+              isError={!!errors.monthlyIncome}
+              placeholder={t('family.monthlyIncomePlaceholder') || 'Enter your monthly income'}
               className={`w-full ${isRTL ? 'text-right' : 'text-left'}`}
               aria-invalid={errors.monthlyIncome ? 'true' : 'false'}
             />

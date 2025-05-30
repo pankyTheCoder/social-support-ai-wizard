@@ -195,6 +195,7 @@ const SituationDescriptionsStep: React.FC = () => {
                   message: t('validation.minLength').replace('{0}', '50'),
                 },
               })}
+              isError={!!errors[key]}
               className={`min-h-32 w-full ${isRTL ? 'text-right' : 'text-left'}`}
               placeholder={t(placeholderKey) || defaultPlaceholder}
               aria-invalid={errors[key] ? 'true' : 'false'}
