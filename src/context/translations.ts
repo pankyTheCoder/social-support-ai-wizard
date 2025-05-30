@@ -145,8 +145,11 @@ export const translations = {
       // Situation Descriptions
       'situation.title': 'وصف الحالة',
       'situation.currentFinancial': 'الوضع المالي الحالي',
+      'situation.currentFinancialPlaceholder': 'وصف وضعك المالي الحالي، بما في ذلك مصادر الدخل والنفقات والديون وأي صعوبات مالية تواجهها...',
       'situation.employment': 'ظروف العمل',
+      'situation.employmentPlaceholder': 'وصف حالة عملك، وسجل عملك، وأي عوائق أمام التوظيف، وكيف يؤثر وضعك الحالي على قدرتك على العمل',
       'situation.reason': 'سبب التقديم',
+      'situation.reasonPlaceholder': 'اشرح سبب تقديمك طلبًا للحصول على الدعم الاجتماعي، وما هي المساعدة المحددة التي تحتاجها، وكيف ستساعد في تحسين وضعك',
       'situation.helpWrite': 'ساعدني في الكتابة',
       'situation.aiSuggestion': 'اقتراح الذكاء الاصطناعي',
       'situation.accept': 'قبول',
