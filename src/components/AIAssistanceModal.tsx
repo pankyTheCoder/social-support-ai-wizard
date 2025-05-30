@@ -1,7 +1,13 @@
-import React, { useState } from 'react';
+import { useState, useEffect, type FC } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from '@/components/ui/dialog';
 import { Textarea } from '@/components/ui/textarea';
 import { Loader2 } from 'lucide-react';
 
@@ -16,7 +22,7 @@ interface AIAssistanceModalProps {
   onDiscard: () => void;
 }
 
-const AIAssistanceModal: React.FC<AIAssistanceModalProps> = ({
+const AIAssistanceModal: FC<AIAssistanceModalProps> = ({
   isOpen,
   onClose,
   suggestion,
@@ -30,7 +36,7 @@ const AIAssistanceModal: React.FC<AIAssistanceModalProps> = ({
   const [editedText, setEditedText] = useState(suggestion);
   const [isEditing, setIsEditing] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setEditedText(suggestion);
     setIsEditing(false);
   }, [suggestion]);
@@ -54,6 +60,8 @@ const AIAssistanceModal: React.FC<AIAssistanceModalProps> = ({
     onClose();
   };
 
+  const isSuggestionEmpty = !suggestion.trim();
+
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className={`max-w-2xl ${isRTL ? 'text-right' : 'text-left'}`}>
@@ -62,7 +70,8 @@ const AIAssistanceModal: React.FC<AIAssistanceModalProps> = ({
             {t('situation.aiSuggestion')}
           </DialogTitle>
           <DialogDescription>
-            Review the AI-generated suggestion below. You can accept it as is, edit it, or discard it.
+            {t('situation.reviewAISuggestion') ||
+              'Review the AI-generated suggestion below. You can accept it as is, edit it, or discard it.'}
           </DialogDescription>
         </DialogHeader>
 
@@ -84,13 +93,13 @@ const AIAssistanceModal: React.FC<AIAssistanceModalProps> = ({
               {isEditing ? (
                 <div className="space-y-2">
                   <label className="text-sm font-medium text-gray-700">
-                    Edit the suggestion:
+                    {t('situation.editLabel') || 'Edit the suggestion:'}
                   </label>
                   <Textarea
                     value={editedText}
-                    onChange={(e) => setEditedText(e.target.value)}
+                    onChange={e => setEditedText(e.target.value)}
                     className={`min-h-32 ${isRTL ? 'text-right' : 'text-left'}`}
-                    placeholder="Edit the suggestion..."
+                    placeholder={t('situation.editPlaceholder') || 'Edit the suggestion...'}
                   />
                 </div>
               ) : (
@@ -105,20 +114,18 @@ const AIAssistanceModal: React.FC<AIAssistanceModalProps> = ({
                 <Button
                   onClick={handleAccept}
                   className="bg-green-600 hover:bg-green-700 text-white"
-                  disabled={!suggestion.trim()}
+                  disabled={isSuggestionEmpty}
                 >
                   {t('situation.accept')}
                 </Button>
-                
                 <Button
                   onClick={handleEdit}
                   variant="outline"
                   className="border-blue-600 text-blue-600 hover:bg-blue-50"
-                  disabled={!suggestion.trim()}
+                  disabled={isSuggestionEmpty}
                 >
-                  {isEditing ? 'Apply Edit' : t('situation.edit')}
+                  {isEditing ? t('situation.applyEdit') || 'Apply Edit' : t('situation.edit')}
                 </Button>
-                
                 <Button
                   onClick={handleDiscard}
                   variant="outline"

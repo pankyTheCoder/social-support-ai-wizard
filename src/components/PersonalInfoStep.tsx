@@ -8,11 +8,23 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
+const genderOptions = [
+  { value: 'male', labelKey: 'gender.male' },
+  { value: 'female', labelKey: 'gender.female' },
+  { value: 'other', labelKey: 'gender.other' },
+];
+
 const PersonalInfoStep: React.FC = () => {
   const { state, dispatch } = useFormContext();
   const { t, isRTL } = useLanguage();
-  
-  const { register, handleSubmit, formState: { errors }, setValue, watch } = useForm<PersonalInfo>({
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setValue,
+    watch,
+  } = useForm<PersonalInfo>({
     defaultValues: state.formData.personalInfo,
   });
 
@@ -28,9 +40,10 @@ const PersonalInfoStep: React.FC = () => {
       <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">
         {t('personal.title')}
       </h2>
-      
+
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Name */}
           <div className="space-y-2">
             <Label htmlFor="name" className="text-sm font-medium text-gray-700">
               {t('personal.name')} *
@@ -39,7 +52,7 @@ const PersonalInfoStep: React.FC = () => {
               id="name"
               {...register('name', { required: t('validation.required') })}
               className={`w-full ${isRTL ? 'text-right' : 'text-left'}`}
-              aria-invalid={errors.name ? 'true' : 'false'}
+              aria-invalid={!!errors.name}
               aria-describedby={errors.name ? 'name-error' : undefined}
             />
             {errors.name && (
@@ -49,6 +62,7 @@ const PersonalInfoStep: React.FC = () => {
             )}
           </div>
 
+          {/* National ID */}
           <div className="space-y-2">
             <Label htmlFor="nationalId" className="text-sm font-medium text-gray-700">
               {t('personal.nationalId')} *
@@ -57,7 +71,7 @@ const PersonalInfoStep: React.FC = () => {
               id="nationalId"
               {...register('nationalId', { required: t('validation.required') })}
               className={`w-full ${isRTL ? 'text-right' : 'text-left'}`}
-              aria-invalid={errors.nationalId ? 'true' : 'false'}
+              aria-invalid={!!errors.nationalId}
             />
             {errors.nationalId && (
               <p className="text-sm text-red-600" role="alert">
@@ -66,6 +80,7 @@ const PersonalInfoStep: React.FC = () => {
             )}
           </div>
 
+          {/* Date of Birth */}
           <div className="space-y-2">
             <Label htmlFor="dateOfBirth" className="text-sm font-medium text-gray-700">
               {t('personal.dateOfBirth')} *
@@ -74,8 +89,8 @@ const PersonalInfoStep: React.FC = () => {
               id="dateOfBirth"
               type="date"
               {...register('dateOfBirth', { required: t('validation.required') })}
-              className="w-full"
-              aria-invalid={errors.dateOfBirth ? 'true' : 'false'}
+              className={`w-full ${isRTL ? 'text-right' : 'text-left'}`}
+              aria-invalid={!!errors.dateOfBirth}
             />
             {errors.dateOfBirth && (
               <p className="text-sm text-red-600" role="alert">
@@ -84,25 +99,29 @@ const PersonalInfoStep: React.FC = () => {
             )}
           </div>
 
+          {/* Gender */}
           <div className="space-y-2">
             <Label htmlFor="gender" className="text-sm font-medium text-gray-700">
               {t('personal.gender')} *
             </Label>
             <Select
               value={selectedGender}
-              onValueChange={(value) => setValue('gender', value as PersonalInfo['gender'])}
+              onValueChange={value => setValue('gender', value as PersonalInfo['gender'])}
             >
               <SelectTrigger className="w-full">
                 <SelectValue placeholder={t('personal.gender')} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="male">{t('gender.male')}</SelectItem>
-                <SelectItem value="female">{t('gender.female')}</SelectItem>
-                <SelectItem value="other">{t('gender.other')}</SelectItem>
+                {genderOptions.map(opt => (
+                  <SelectItem key={opt.value} value={opt.value}>
+                    {t(opt.labelKey)}
+                  </SelectItem>
+                ))}
               </SelectContent>
             </Select>
           </div>
 
+          {/* Address */}
           <div className="space-y-2 md:col-span-2">
             <Label htmlFor="address" className="text-sm font-medium text-gray-700">
               {t('personal.address')} *
@@ -111,7 +130,7 @@ const PersonalInfoStep: React.FC = () => {
               id="address"
               {...register('address', { required: t('validation.required') })}
               className={`w-full ${isRTL ? 'text-right' : 'text-left'}`}
-              aria-invalid={errors.address ? 'true' : 'false'}
+              aria-invalid={!!errors.address}
             />
             {errors.address && (
               <p className="text-sm text-red-600" role="alert">
@@ -120,6 +139,7 @@ const PersonalInfoStep: React.FC = () => {
             )}
           </div>
 
+          {/* City */}
           <div className="space-y-2">
             <Label htmlFor="city" className="text-sm font-medium text-gray-700">
               {t('personal.city')} *
@@ -128,7 +148,7 @@ const PersonalInfoStep: React.FC = () => {
               id="city"
               {...register('city', { required: t('validation.required') })}
               className={`w-full ${isRTL ? 'text-right' : 'text-left'}`}
-              aria-invalid={errors.city ? 'true' : 'false'}
+              aria-invalid={!!errors.city}
             />
             {errors.city && (
               <p className="text-sm text-red-600" role="alert">
@@ -137,6 +157,7 @@ const PersonalInfoStep: React.FC = () => {
             )}
           </div>
 
+          {/* State */}
           <div className="space-y-2">
             <Label htmlFor="state" className="text-sm font-medium text-gray-700">
               {t('personal.state')} *
@@ -145,7 +166,7 @@ const PersonalInfoStep: React.FC = () => {
               id="state"
               {...register('state', { required: t('validation.required') })}
               className={`w-full ${isRTL ? 'text-right' : 'text-left'}`}
-              aria-invalid={errors.state ? 'true' : 'false'}
+              aria-invalid={!!errors.state}
             />
             {errors.state && (
               <p className="text-sm text-red-600" role="alert">
@@ -154,6 +175,7 @@ const PersonalInfoStep: React.FC = () => {
             )}
           </div>
 
+          {/* Country */}
           <div className="space-y-2">
             <Label htmlFor="country" className="text-sm font-medium text-gray-700">
               {t('personal.country')} *
@@ -162,7 +184,7 @@ const PersonalInfoStep: React.FC = () => {
               id="country"
               {...register('country', { required: t('validation.required') })}
               className={`w-full ${isRTL ? 'text-right' : 'text-left'}`}
-              aria-invalid={errors.country ? 'true' : 'false'}
+              aria-invalid={!!errors.country}
             />
             {errors.country && (
               <p className="text-sm text-red-600" role="alert">
@@ -171,6 +193,7 @@ const PersonalInfoStep: React.FC = () => {
             )}
           </div>
 
+          {/* Phone */}
           <div className="space-y-2">
             <Label htmlFor="phone" className="text-sm font-medium text-gray-700">
               {t('personal.phone')} *
@@ -180,7 +203,7 @@ const PersonalInfoStep: React.FC = () => {
               type="tel"
               {...register('phone', { required: t('validation.required') })}
               className={`w-full ${isRTL ? 'text-right' : 'text-left'}`}
-              aria-invalid={errors.phone ? 'true' : 'false'}
+              aria-invalid={!!errors.phone}
             />
             {errors.phone && (
               <p className="text-sm text-red-600" role="alert">
@@ -189,6 +212,7 @@ const PersonalInfoStep: React.FC = () => {
             )}
           </div>
 
+          {/* Email */}
           <div className="space-y-2 md:col-span-2">
             <Label htmlFor="email" className="text-sm font-medium text-gray-700">
               {t('personal.email')} *
@@ -196,15 +220,15 @@ const PersonalInfoStep: React.FC = () => {
             <Input
               id="email"
               type="email"
-              {...register('email', { 
+              {...register('email', {
                 required: t('validation.required'),
                 pattern: {
                   value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                  message: t('validation.email')
-                }
+                  message: t('validation.email'),
+                },
               })}
               className={`w-full ${isRTL ? 'text-right' : 'text-left'}`}
-              aria-invalid={errors.email ? 'true' : 'false'}
+              aria-invalid={!!errors.email}
             />
             {errors.email && (
               <p className="text-sm text-red-600" role="alert">
@@ -215,8 +239,8 @@ const PersonalInfoStep: React.FC = () => {
         </div>
 
         <div className="flex justify-end pt-6">
-          <Button 
-            type="submit" 
+          <Button
+            type="submit"
             className="px-8 py-2 bg-blue-600 hover:bg-blue-700 text-white"
           >
             {t('nav.next')}

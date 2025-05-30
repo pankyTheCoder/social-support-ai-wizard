@@ -58,8 +58,11 @@ export const translations = {
       // Situation Descriptions
       'situation.title': 'Situation Descriptions',
       'situation.currentFinancial': 'Current Financial Situation',
+      'situation.currentFinancialPlaceholder': 'Describe your current financial situation, including income sources, expenses, debts, and any financial difficulties you are experiencing...',
       'situation.employment': 'Employment Circumstances',
+      'situation.employmentPlaceholder': 'Describe your employment status, work history, any barriers to employment, and how your current situation affects your ability to work...',
       'situation.reason': 'Reason for Applying',
+      'situation.reasonPlaceholder': 'Explain why you are applying for social support, what specific assistance you need, and how it would help improve your situation...',
       'situation.helpWrite': 'Help Me Write',
       'situation.aiSuggestion': 'AI Suggestion',
       'situation.accept': 'Accept',
