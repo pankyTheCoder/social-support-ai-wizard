@@ -7,12 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-
-const genderOptions = [
-  { value: 'male', labelKey: 'gender.male' },
-  { value: 'female', labelKey: 'gender.female' },
-  { value: 'other', labelKey: 'gender.other' },
-];
+import { genderOptions } from '@/constants';
 
 const PersonalInfoStep: React.FC = () => {
   const { state, dispatch } = useFormContext();

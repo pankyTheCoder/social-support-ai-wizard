@@ -13,28 +13,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-
-const maritalStatusOptions = [
-  { value: 'single', labelKey: 'marital.single' },
-  { value: 'married', labelKey: 'marital.married' },
-  { value: 'divorced', labelKey: 'marital.divorced' },
-  { value: 'widowed', labelKey: 'marital.widowed' },
-];
-
-const employmentStatusOptions = [
-  { value: 'employed', labelKey: 'employment.employed' },
-  { value: 'unemployed', labelKey: 'employment.unemployed' },
-  { value: 'self-employed', labelKey: 'employment.selfEmployed' },
-  { value: 'retired', labelKey: 'employment.retired' },
-  { value: 'student', labelKey: 'employment.student' },
-];
-
-const housingStatusOptions = [
-  { value: 'owned', labelKey: 'housing.owned' },
-  { value: 'rented', labelKey: 'housing.rented' },
-  { value: 'shared', labelKey: 'housing.shared' },
-  { value: 'homeless', labelKey: 'housing.homeless' },
-];
+import { maritalStatusOptions } from '@/constants';
+import { employmentStatusOptions } from '@/constants';
+import { housingStatusOptions } from '@/constants';
 
 const FamilyFinancialStep: React.FC = () => {
   const { state, dispatch } = useFormContext();
@@ -182,7 +163,7 @@ const FamilyFinancialStep: React.FC = () => {
               </SelectTrigger>
               <SelectContent>
                 {housingStatusOptions.map(opt => (
-                  <SelectItem key={opt.value} value={opt.value}>
+                  <SelectItem key={opt.labelKey} value={opt.value}>
                     {t(opt.labelKey)}
                   </SelectItem>
                 ))}
